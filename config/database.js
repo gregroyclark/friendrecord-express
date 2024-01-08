@@ -20,10 +20,13 @@ const db = mysql.createPool({
 //   database: process.env.PLANETSCALE_DB,
 // });
 
-db.getConnection((err, connection) => {
-  if (err) throw err;
-  console.log('Connected to the database');
-  connection.release();
+db.getConnection((error, connection) => {
+  try {
+    connection.release();
+    console.log('Connected to the database');
+  } catch (error) {
+    throw new Error('Error connecting to the database: ', error);
+  }
 });
 
 module.exports = { db };
