@@ -13,11 +13,11 @@ const db = mysql.createPool({
 
 // prod
 // const db = mysql.createPool({
-//   host: process.env.MYSQL_HOST,
-//   port: Number(process.env.MYSQL_PORT),
+//   database: process.env.DATABASE,
+//   host: process.env.PLANETSCALE_DB_HOST,
 //   user: process.env.PLANETSCALE_DB_USERNAME,
 //   password: process.env.PLANETSCALE_DB_PASSWORD,
-//   database: process.env.PLANETSCALE_DB,
+//   port: Number(process.env.MYSQL_PORT),
 // });
 
 db.getConnection((error, connection) => {
