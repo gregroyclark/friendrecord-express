@@ -17,7 +17,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('combined'));
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://friendrecord.netlify.app',
+    origin: 'https://friendrecord.com',
+  })
+);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
