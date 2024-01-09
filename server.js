@@ -21,8 +21,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      'https://friendrecord-express.onrender.com',
       'https://friendrecord.netlify.app',
+      'https://friendrecord-express.onrender.com',
       'https://friendrecord.com',
     ],
     credentials: true,
