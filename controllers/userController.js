@@ -1,4 +1,4 @@
-const db = require('../models/userModel');
+const pool = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -25,7 +25,7 @@ const register = async (req, res) => {
   }
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = await db.createUser(
+    const user = await pool.createUser(
       req.body.firstName,
       req.body.lastName,
       req.body.email,
@@ -47,7 +47,7 @@ const login = async (req, res) => {
     return res.status(400).send('Missing required fields');
   }
 
-  const user = await db.findUserByEmail(req.body.email);
+  const user = await pool.findUserByEmail(req.body.email);
   console.log('User found: ', user);
 
   let isAuthenticated = false;

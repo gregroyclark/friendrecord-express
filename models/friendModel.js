@@ -1,4 +1,4 @@
-const { db } = require('../config/database');
+const { pool } = require('../config/database');
 
 /* 
 
@@ -40,7 +40,7 @@ exports.readAllFriends = (userId) => {
   console.log('Reading friends for userId: ', userId);
   return new Promise((resolve, reject) => {
     const query = 'SELECT * FROM friends where userId = $1';
-    db.query(query, [userId], (err, result) => {
+    pool.query(query, [userId], (err, result) => {
       if (err) {
         console.log('Error executing query: ', err);
         reject(err);
@@ -56,7 +56,7 @@ exports.readAllFriends = (userId) => {
 exports.readOneFriend = (id) => {
   return new Promise((resolve, reject) => {
     const query = 'SELECT * FROM friends WHERE id = $1';
-    db.query(query, [id], (err, result) => {
+    pool.query(query, [id], (err, result) => {
       if (err) {
         reject(err);
       }
@@ -80,7 +80,7 @@ exports.updateFriend = (
     const query =
       'UPDATE friends SET firstName = $1, lastName = $2, email = $3, phoneNumber = $4, notes = $5, userId = $6 WHERE id = $7';
     const values = [firstName, lastName, email, phoneNumber, notes, userId, id];
-    db.query(query, values, (err, result) => {
+    pool.query(query, values, (err, result) => {
       if (err) {
         reject(err);
       }
@@ -94,7 +94,7 @@ exports.updateFriend = (
 exports.deleteFriend = (id) => {
   return new Promise((resolve, reject) => {
     const query = 'DELETE FROM friends WHERE id = $1';
-    db.query(query, [id], (err, result) => {
+    pool.query(query, [id], (err, result) => {
       if (err) {
         reject(err);
       }

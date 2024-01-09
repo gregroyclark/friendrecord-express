@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
-const { db } = require('../config/database');
+const { pool } = require('../config/database');
 
 /* 
 
@@ -26,7 +26,7 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
     const query =
       'INSERT INTO users (firstName, lastName, email, hashedPassword, userId) VALUES ($1, $2, $3, $4, $5)';
     const values = [firstName, lastName, email, hashedPassword, userId];
-    db.query(query, values, (err, result) => {
+    pool.query(query, values, (err, result) => {
       if (err) {
         reject(err);
       }
@@ -38,7 +38,7 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
 exports.findUserByEmail = (email) => {
   return new Promise((resolve, reject) => {
     const query = 'SELECT * FROM users WHERE email = $1';
-    db.query(query, [email], (err, result) => {
+    pool.query(query, [email], (err, result) => {
       if (err) {
         reject(err);
       }
