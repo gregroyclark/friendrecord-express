@@ -49,27 +49,6 @@ function authenticateToken(req, res, next) {
 
 module.exports = { authenticateToken };
 
-// app.use(express.static(path.join(__dirname, 'frontend/dist')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
-// });
-
-// this does not seem to work
-// app.all('*', function (req, res, next) {
-//   const origin =
-//     cors.origin.find(
-//       (allowedOrigin) =>
-//         allowedOrigin === req.header('origin').toLocaleLowerCase()
-//     ) || cors.default;
-//   res.header('Access-Control-Allow-Origin', origin);
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   next();
-// });
-
 app.use(routes);
 
 app.listen(port, () =>
