@@ -13,12 +13,12 @@ require('dotenv').config();
 
 // prod
 const db = mysql.createPool({
-  database: process.env.DATABASE_URL,
-  // database: process.env.DATABASE,
-  // host: process.env.PLANETSCALE_DB_HOST,
-  // user: process.env.PLANETSCALE_DB_USERNAME,
-  // password: process.env.PLANETSCALE_DB_PASSWORD,
-  // port: Number(process.env.MYSQL_PORT),
+  database_url: process.env.PLANETSCALE_DATABASE_URL,
+  database: process.env.DATABASE,
+  host: process.env.PLANETSCALE_DB_HOST,
+  user: process.env.PLANETSCALE_DB_USERNAME,
+  password: process.env.PLANETSCALE_DB_PASSWORD,
+  port: Number(process.env.MYSQL_PORT),
 });
 
 db.getConnection((error, connection) => {
