@@ -1,4 +1,4 @@
-const db = require('../models/friendModel');
+const { pool } = require('../models/friendModel');
 
 /* 
 
@@ -15,20 +15,20 @@ const db = require('../models/friendModel');
 
 const createFriend = async (req, res) => {
   const { firstName, lastName, email, phoneNumber, notes, userId } = req.body;
-  if (
-    !req.body ||
-    !firstName ||
-    !lastName ||
-    !email ||
-    !phoneNumber ||
-    !notes ||
-    !userId
-  ) {
-    return res.status(400).send('Missing required fields');
-  }
+  // if (
+  //   !req.body ||
+  //   !firstName ||
+  //   !lastName ||
+  //   !email ||
+  //   !phoneNumber ||
+  //   !notes ||
+  //   !userId
+  // ) {
+  //   return res.status(400).send('Missing required fields');
+  // }
 
   try {
-    const friend = await db.createFriend(
+    const friend = await pool.createFriend(
       firstName,
       lastName,
       email,
@@ -54,7 +54,7 @@ const readAllFriends = async (req, res) => {
     req.params.userId
   );
   try {
-    const result = await db.readAllFriends(req.params.userId);
+    const result = await pool.readAllFriends(req.params.userId);
     console.log('Sending friends list: ', result);
     res.send(result);
   } catch (err) {
@@ -67,7 +67,7 @@ const readAllFriends = async (req, res) => {
 
 const readOneFriend = async (req, res) => {
   try {
-    const result = await db.readOneFriend(req.params.id);
+    const result = await pool.readOneFriend(req.params.id);
     res.send(result);
   } catch (err) {
     res.status(500).send(err);
@@ -78,7 +78,7 @@ const readOneFriend = async (req, res) => {
 
 const updateFriend = async (req, res) => {
   try {
-    const result = await db.updateFriend(
+    const result = await pool.updateFriend(
       req.params.id,
       req.body.firstName,
       req.body.lastName,
@@ -97,7 +97,7 @@ const updateFriend = async (req, res) => {
 
 const deleteFriend = async (req, res) => {
   try {
-    const result = await db.deleteFriend(req.params.id);
+    const result = await pool.deleteFriend(req.params.id);
     res.send(result);
   } catch (err) {
     res.status(500).send(err);

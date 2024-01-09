@@ -1,7 +1,19 @@
 const { v4: uuidv4 } = require('uuid');
 
-const { db } = require('../config/database');
+const { pool } = require('../config/database');
 
+/* 
+
+  ==========================================
+
+  Database queries, register & login
+  
+
+  ==========================================
+
+*/
+
+// createUser
 exports.createUser = async (firstName, lastName, email, hashedPassword) => {
   try {
     const existingUser = await exports.findUserByEmail(email);
@@ -12,10 +24,12 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
   return new Promise((resolve, reject) => {
     const userId = uuidv4();
     const query =
-      'INSERT INTO users (firstName, lastName, email, hashedPassword, userId) VALUES (?, ?, ?, ?, ?)';
+      'INSERT INTO users (firstName, lastName, email, hashedPassword, userId) VALUES ($1, $2, $3, $4, $5)';
     const values = [firstName, lastName, email, hashedPassword, userId];
-    db.query(query, values, (err, result) => {
-      if (err) reject(err);
+    pool.query(query, values, (err, result) => {
+      if (err) {
+        reject(err);
+      }
       resolve(result);
     });
   });
@@ -23,9 +37,11 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
 
 exports.findUserByEmail = (email) => {
   return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM users WHERE email = ?';
-    db.query(query, [email], (err, result) => {
-      if (err) reject(err);
+    const query = 'SELECT * FROM users WHERE email = $1';
+    pool.query(query, [email], (err, result) => {
+      if (err) {
+        reject(err);
+      }
       resolve(result[0]);
     });
   });
