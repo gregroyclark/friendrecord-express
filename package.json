@@ -24,6 +24,8 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.7.0",
     "pg": "^8.11.3",
+    "pg-promise": "^11.5.4",
+    "postgresql": "^0.0.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
