@@ -1,4 +1,4 @@
-const pool = require('../models/friendModel');
+const { pool } = require('../models/friendModel');
 
 /* 
 
