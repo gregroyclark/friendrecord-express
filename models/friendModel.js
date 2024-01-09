@@ -22,9 +22,9 @@ exports.createFriend = (
 ) => {
   return new Promise((resolve, reject) => {
     const query =
-      'INSERT INTO friends (firstName, lastName, email, phoneNumber, notes, userId) VALUES (?, ?, ?, ?, ?, ?)';
+      'INSERT INTO friends (firstName, lastName, email, phoneNumber, notes, userId) VALUES ($1, $2, $3, $4, $5, $6)';
     const values = [firstName, lastName, email, phoneNumber, notes, userId];
-    db.query(query, values, (err, result) => {
+    pool.query(query, values, (err, result) => {
       if (err) {
         console.log(err);
         reject({ err: 'An error occurred while executing the SQL query.' });
