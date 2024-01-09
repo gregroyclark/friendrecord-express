@@ -1,4 +1,5 @@
 const express = require('express');
+const pgp = require('pg-promise')();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -6,7 +7,14 @@ const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 
+const { database } = require('./config/database');
 const routes = require('./routes');
+
+const db = pgp(database);
+
+db.none(fs.readFileSync('./createTable.sql').toString())
+  .then(() => console.log('Table created'))
+  .catch((error) => console.log('ERROR: ', error));
 
 const app = express();
 
