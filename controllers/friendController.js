@@ -15,17 +15,17 @@ const db = require('../models/friendModel');
 
 const createFriend = async (req, res) => {
   const { firstName, lastName, email, phoneNumber, notes, userId } = req.body;
-  if (
-    !req.body ||
-    !firstName ||
-    !lastName ||
-    !email ||
-    !phoneNumber ||
-    !notes ||
-    !userId
-  ) {
-    return res.status(400).send('Missing required fields');
-  }
+  // if (
+  //   !req.body ||
+  //   !firstName ||
+  //   !lastName ||
+  //   !email ||
+  //   !phoneNumber ||
+  //   !notes ||
+  //   !userId
+  // ) {
+  //   return res.status(400).send('Missing required fields');
+  // }
 
   try {
     const friend = await db.createFriend(
