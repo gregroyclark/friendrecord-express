@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('combined'));
 app.use(express.json());
+
 app.use(
   cors({
     origin: [
@@ -24,6 +25,7 @@ app.use(
       'https://friendrecord.netlify.app',
       'https://friendrecord.com',
     ],
+    credentials: true,
     default: 'https://friendrecord.com',
   })
 );
@@ -53,19 +55,20 @@ module.exports = { authenticateToken };
 //   res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
 // });
 
-app.all('*', function (req, res, next) {
-  const origin =
-    cors.origin.find(
-      (allowedOrigin) =>
-        allowedOrigin === req.header('origin').toLocaleLowerCase()
-    ) || cors.default;
-  res.header('Access-Control-Allow-Origin', origin);
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
+// this does not seem to work
+// app.all('*', function (req, res, next) {
+//   const origin =
+//     cors.origin.find(
+//       (allowedOrigin) =>
+//         allowedOrigin === req.header('origin').toLocaleLowerCase()
+//     ) || cors.default;
+//   res.header('Access-Control-Allow-Origin', origin);
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept'
+//   );
+//   next();
+// });
 
 app.use(routes);
 
