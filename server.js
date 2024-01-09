@@ -53,17 +53,19 @@ module.exports = { authenticateToken };
 //   res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
 // });
 
-// app.all('*', function (req, res, next) {
-//   const origin = cors.origin.includes(req.header('origin').toLocaleLowerCase())
-//     ? req.headers.origin
-//     : cors.default;
-//   res.header('Access-Control-Allow-Origin', origin);
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   next();
-// });
+app.all('*', function (req, res, next) {
+  const origin =
+    cors.origin.find(
+      (allowedOrigin) =>
+        allowedOrigin === req.header('origin').toLocaleLowerCase()
+    ) || cors.default;
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 app.use(routes);
 
