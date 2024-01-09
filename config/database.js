@@ -4,6 +4,11 @@ require('dotenv').config();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  database: process.env.PG_DATABASE,
+  host: process.env.PG_HOST,
+  port: 5432,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
 });
 
 pool.connect((error) => {
@@ -11,8 +16,14 @@ pool.connect((error) => {
     console.error('Error connecting to the database: ', error);
     throw new Error('Error connecting to the database: ', error);
   } else {
-    console.log('Connected to the database');
+    console.log(
+      `Connected to the database on ${process.env.PG_HOST}:${process.env.PORT}`
+    );
   }
+});
+
+pool.on('error', (error) => {
+  console.error('Unexpected error on idle client', error);
 });
 
 module.exports = { pool };
