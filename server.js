@@ -19,9 +19,12 @@ app.use(logger('combined'));
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://friendrecord-express.onrender.com',
-    // origin: 'https://friendrecord.netlify.app',
-    // origin: 'https://friendrecord.com',
+    origin: [
+      'https://friendrecord-express.onrender.com',
+      'https://friendrecord.netlify.app',
+      'https://friendrecord.com',
+    ],
+    default: 'https://friendrecord.com',
   })
 );
 
@@ -50,6 +53,17 @@ module.exports = { authenticateToken };
 //   res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
 // });
 
+app.all('*', function (req, res, next) {
+  const origin = cors.origin.includes(req.header('origin').toLocaleLowerCase())
+    ? req.headers.origin
+    : cors.default;
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 app.use(routes);
 
 app.listen(port, () =>
