@@ -3,11 +3,16 @@ const router = require('express').Router();
 const apiRoutes = require('./api');
 
 // API routes
-router.use('/api', apiRoutes);
-
-// If no API routes are hit, send the React app
-// router.use((req, res) => {
-//   res.sendFile(path.join(__dirname, '../../frontend/index.html'));
-// });
+router.use(
+  '/api',
+  (req, res, next) => {
+    res.header(
+      'Access-Control-Allow-Origin',
+      'https://friendrecord.netlify.app'
+    );
+    next();
+  },
+  apiRoutes
+);
 
 module.exports = router;
