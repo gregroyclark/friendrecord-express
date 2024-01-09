@@ -19,7 +19,8 @@ app.use(logger('combined'));
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://friendrecord.netlify.app',
+    origin: 'https://friendrecord-express.onrender.com',
+    // origin: 'https://friendrecord.netlify.app',
     // origin: 'https://friendrecord.com',
   })
 );
