@@ -1,4 +1,6 @@
-GRANT postgres_subuser1 TO postgres;
+CREATE ROLE postgres_subuser1 LOGIN PASSWORD pgpassword;
+
+GRANT postgres_subuser1 TO friendsdb_qatk_user;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
