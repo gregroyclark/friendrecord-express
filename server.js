@@ -52,7 +52,7 @@ app.use(
   cors({
     origin: 'https://friendrecord.netlify.app',
     methods: ['GET, POST, OPTIONS, PUT, PATCH, DELETE'],
-    allowedHeaders: ['X-Requested-With', 'content-type'],
+    allowedHeaders: ['X-Requested-With', 'content-type', 'Authorization'],
     credentials: true,
   })
 );
