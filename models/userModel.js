@@ -44,7 +44,7 @@ exports.findUserByEmail = (email) => {
         reject(err);
       }
       const user = result.rows[0];
-      resolve(user.hashedPassword);
+      resolve(user);
     });
   });
 };
