@@ -22,7 +22,7 @@ exports.createFriend = (
 ) => {
   return new Promise((resolve, reject) => {
     const query =
-      'INSERT INTO friends (firstName, lastName, email, phoneNumber, notes, userId) VALUES ($1, $2, $3, $4, $5, $6)';
+      'INSERT INTO friends ("firstName", "lastName", "email", "phoneNumber", "notes", "userId") VALUES ($1, $2, $3, $4, $5, $6)';
     const values = [firstName, lastName, email, phoneNumber, notes, userId];
     pool.query(query, values, (err, result) => {
       if (err) {
@@ -39,7 +39,7 @@ exports.createFriend = (
 exports.readAllFriends = (userId) => {
   console.log('Reading friends for userId: ', userId);
   return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM friends where userId = $1';
+    const query = 'SELECT * FROM friends where "userId" = $1';
     pool.query(query, [userId], (err, result) => {
       if (err) {
         console.log('Error executing query: ', err);
@@ -55,7 +55,7 @@ exports.readAllFriends = (userId) => {
 
 exports.readOneFriend = (id) => {
   return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM friends WHERE id = $1';
+    const query = 'SELECT * FROM friends WHERE "id" = $1';
     pool.query(query, [id], (err, result) => {
       if (err) {
         reject(err);
@@ -78,7 +78,7 @@ exports.updateFriend = (
 ) => {
   return new Promise((resolve, reject) => {
     const query =
-      'UPDATE friends SET firstName = $1, lastName = $2, email = $3, phoneNumber = $4, notes = $5, userId = $6 WHERE id = $7';
+      'UPDATE friends SET "firstName" = $1, "lastName" = $2, "email" = $3, "phoneNumber" = $4, "notes" = $5, "userId" = $6 WHERE "id" = $7';
     const values = [firstName, lastName, email, phoneNumber, notes, userId, id];
     pool.query(query, values, (err, result) => {
       if (err) {
@@ -93,7 +93,7 @@ exports.updateFriend = (
 
 exports.deleteFriend = (id) => {
   return new Promise((resolve, reject) => {
-    const query = 'DELETE FROM friends WHERE id = $1';
+    const query = 'DELETE FROM friends WHERE "id" = $1';
     pool.query(query, [id], (err, result) => {
       if (err) {
         reject(err);
