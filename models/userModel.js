@@ -36,6 +36,7 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
 };
 
 exports.findUserByEmail = (email) => {
+  console.log('Searching for user with email: ', email);
   return new Promise((resolve, reject) => {
     const query = 'SELECT * FROM users WHERE email = $1';
     pool.query(query, [email], (err, result) => {
