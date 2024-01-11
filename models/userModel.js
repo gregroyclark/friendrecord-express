@@ -43,8 +43,16 @@ exports.findUserByEmail = (email) => {
       if (err) {
         reject(err);
       }
-      const user = result.rows[0];
-      resolve(user);
+      const foundUser = result.rows[0];
+      const user = {
+        id: foundUser.id,
+        firstName: foundUser.firstname,
+        lastName: foundUser.lastname,
+        email: foundUser.email,
+        hashedPassword: foundUser.hashedPassword,
+        userId: foundUser.userId,
+      };
+      resolve(user.hashedPassword);
     });
   });
 };
