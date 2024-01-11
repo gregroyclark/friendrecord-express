@@ -56,7 +56,7 @@ const readAllFriends = async (req, res) => {
   try {
     const result = await pool.readAllFriends(req.params.userId);
     console.log('Sending friends list: ', result);
-    res.send(result);
+    res.send(result.rows);
   } catch (err) {
     console.error('Error reading all friends: ', err);
     res.status(500).send(err);
