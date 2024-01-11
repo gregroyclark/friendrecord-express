@@ -51,10 +51,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: 'https://friendrecord.netlify.app',
-    'Access-Control-Allow-Origin': 'https://friendrecord.netlify.app',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-    'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-    'Access-Control-Allow-Credentials': true,
+    methods: ['GET, POST, OPTIONS, PUT, PATCH, DELETE'],
+    allowedHeaders: ['X-Requested-With', 'content-type'],
     credentials: true,
   })
 );
