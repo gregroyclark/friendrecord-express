@@ -24,7 +24,7 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
   return new Promise((resolve, reject) => {
     const userId = uuidv4();
     const query =
-      'INSERT INTO users (firstName, lastName, email, hashedPassword, userId) VALUES ($1, $2, $3, $4, $5)';
+      'INSERT INTO users ("firstName", "lastName", "email", "hashedPassword", "userId") VALUES ($1, $2, $3, $4, $5)';
     const values = [firstName, lastName, email, hashedPassword, userId];
     pool.query(query, values, (err, result) => {
       if (err) {
@@ -38,7 +38,7 @@ exports.createUser = async (firstName, lastName, email, hashedPassword) => {
 exports.findUserByEmail = (email) => {
   console.log('Searching for user with email: ', email);
   return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM users WHERE email = $1';
+    const query = 'SELECT * FROM users WHERE "email" = $1';
     pool.query(query, [email], (err, result) => {
       if (err) {
         reject(err);
