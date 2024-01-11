@@ -42,6 +42,9 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   console.log('Handling login request...');
+  console.log('Request body: ', req.body);
+  console.log('Email from request body: ', req.body.email);
+  console.log('Password from request body: ', req.body.password);
 
   if (!req.body || !req.body.email || !req.body.password) {
     return res.status(400).send('Missing required fields');
@@ -55,14 +58,24 @@ const login = async (req, res) => {
 
   let isAuthenticated = false;
 
-  if (user && user.hashedPassword) {
+  try {
     isAuthenticated = await bcrypt.compare(
       req.body.password,
       user.hashedPassword
     );
-
+  } catch (error) {
+    console.error('Error comparing passwords: ', error);
+  } finally {
     console.log('Authentication result: ', isAuthenticated);
   }
+  // if (user && user.hashedPassword) {
+  //   isAuthenticated = await bcrypt.compare(
+  //     req.body.password,
+  //     user.hashedPassword
+  //   );
+
+  //   console.log('Authentication result: ', isAuthenticated);
+  // }
 
   if (isAuthenticated) {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
