@@ -1,6 +1,6 @@
 const express = require('express');
-const pgp = require('pg-promise')();
-const fs = require('fs');
+// const pgp = require('pg-promise')();
+// const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -8,35 +8,35 @@ const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 
-const { database } = require('./config/database');
+// const { database } = require('./config/database');
 const routes = require('./routes');
 
-const db = pgp(database);
+// const db = pgp(database);
 
-db.any('CREATE DATABASE friendsdb WITH OWNER postgres;')
-  .then(() => console.log('Database'))
-  .catch((error) => console.log('ERROR: ', error))
-  .finally(() => {
-    const newDb = pgp({
-      connectionString: process.env.DATABASE_URL,
-      database: process.env.PG_DATABASE,
-      host: process.env.PG_HOST,
-      port: process.env.PG_PORT,
-      user: process.env.PG_USER,
-      password: process.env.PG_PASSWORD,
-    });
+// db.any('CREATE DATABASE friendsdb WITH OWNER postgres;')
+//   .then(() => console.log('Database'))
+//   .catch((error) => console.log('ERROR: ', error))
+//   .finally(() => {
+//     const newDb = pgp({
+//       connectionString: process.env.DATABASE_URL,
+//       database: process.env.PG_DATABASE,
+//       host: process.env.PG_HOST,
+//       port: process.env.PG_PORT,
+//       user: process.env.PG_USER,
+//       password: process.env.PG_PASSWORD,
+//     });
 
-    newDb
-      .tx(async (t) => {
-        await t.none(fs.readFileSync('./createTable.sql').toString());
-      })
-      .then(() => console.log('Tables created'))
-      .catch((error) => console.log('ERROR: ', error));
-  });
+//     newDb
+//       .tx(async (t) => {
+//         await t.none(fs.readFileSync('./createTable.sql').toString());
+//       })
+//       .then(() => console.log('Tables created'))
+//       .catch((error) => console.log('ERROR: ', error));
+//   });
 
-db.none(fs.readFileSync('./createTable.sql').toString())
-  .then(() => console.log('Table created'))
-  .catch((error) => console.log('ERROR: ', error));
+// db.none(fs.readFileSync('./createTable.sql').toString())
+//   .then(() => console.log('Table created'))
+//   .catch((error) => console.log('ERROR: ', error));
 
 const app = express();
 
@@ -50,7 +50,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ['https://friendrecord.netlify.app', 'http://localhost:5137'],
+    origin: 'https://friendrecord.netlify.app',
     credentials: true,
   })
 );
