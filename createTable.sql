@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS friends (
   "email" VARCHAR(255),
   "phoneNumber" VARCHAR(255),
   "notes" TEXT,
-  "userId" VARCHAR(255) UNIQUE NOT NULL
+  "userId" VARCHAR(255) NOT NULL
 );
