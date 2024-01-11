@@ -52,7 +52,7 @@ const login = async (req, res) => {
 
   let isAuthenticated = false;
 
-  if (user) {
+  if (user && user.hashedPassword) {
     isAuthenticated = await bcrypt.compare(
       req.body.password,
       user.hashedPassword
