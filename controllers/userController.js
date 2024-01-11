@@ -50,6 +50,9 @@ const login = async (req, res) => {
   const user = await pool.findUserByEmail(req.body.email);
   console.log('User found: ', user);
 
+  console.log('Comparing password: ', req.body.password);
+  console.log('With hashedPassword: ', user.hashedPassword);
+
   let isAuthenticated = false;
 
   if (user && user.hashedPassword) {
@@ -57,6 +60,7 @@ const login = async (req, res) => {
       req.body.password,
       user.hashedPassword
     );
+
     console.log('Authentication result: ', isAuthenticated);
   }
 
