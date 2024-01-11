@@ -6,7 +6,11 @@ const { pool } = require('../config/database');
 
   ==========================================
 
-  Database queries, register & login
+  Database queries, users table
+  - register
+  - login
+
+  
   
 
   ==========================================

@@ -4,7 +4,12 @@ const { pool } = require('../config/database');
 
   ==========================================
 
-  Database queries
+  Database queries, friends table
+  - createFriend
+  - readAllFriends
+  - readOneFriend
+  - updateFriend
+  - deleteFriend
 
   ==========================================
 
