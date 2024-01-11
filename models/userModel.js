@@ -42,7 +42,8 @@ exports.findUserByEmail = (email) => {
       if (err) {
         reject(err);
       }
-      resolve(result);
+      const user = result.rows[0];
+      resolve(user);
     });
   });
 };
